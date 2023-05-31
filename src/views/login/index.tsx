@@ -1,14 +1,27 @@
 import { Button, Checkbox, Form, Input } from 'antd'
 import React, { FC } from 'react'
+import { login } from '../../store/slices/auth.slice';
+import { LoginData } from '../../interfaces/auth';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store/store';
+import { useNavigate } from 'react-router-dom';
+import CONSTANTS from '../../constants/routes';
 
 const Login: FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate()
 
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
+  const onFinish = async (values: LoginData) => {
+    await dispatch(login(values)).then((auth) => {
+      if (auth.payload?.token) {//TODO fix ts
+        navigate(CONSTANTS.HOME)
+      } else {
+        // TODO alerta usuario incorrecto
+      }
+    })
   };
-  
+
   const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
   };
 
   return (
@@ -25,7 +38,7 @@ const Login: FC = () => {
       <Form.Item
         label="Email"
         name="email"
-        rules={[{ required: true,  type: 'email', message: 'The input is not valid E-mail!', }]}
+        rules={[{ required: true, type: 'email', message: 'The input is not valid E-mail!', }]}
       >
         <Input />
       </Form.Item>
