@@ -11,6 +11,17 @@ const EditModal = ({ open, handleModal, id }) => { //TODO solucionar ts
     const { auth } = useSelector((state: RootState) => state.authData)
     const [chosenTask, setChosenTask] = useState<Task>({} as Task)
     const [loading, setLoading] = useState(false) //TODO ts
+    const initialValuesChosenTask = {
+        done: chosenTask.done,
+        type: chosenTask.type,
+        task: chosenTask.task,
+        priority: chosenTask.priority,
+        subTasks: chosenTask.subTasks,
+    }
+    const initialValuesNewTask = {
+        type: 'others'
+
+    }
 
     useEffect(() => {
         if (id) {
@@ -28,7 +39,7 @@ const EditModal = ({ open, handleModal, id }) => { //TODO solucionar ts
 
     const onFinish = (values: Task) => {
         if (!!id) { //Edits task
-            dispatch(updateTask({...chosenTask, ...values}))
+            dispatch(updateTask({ ...chosenTask, ...values }))
         } else {
             dispatch(createTask({ //Creates task
                 ...values,
@@ -40,7 +51,7 @@ const EditModal = ({ open, handleModal, id }) => { //TODO solucionar ts
 
     return (
         <Modal
-            afterClose={() => setChosenTask({})}
+            afterClose={() => setChosenTask({} as Task)}
             title="Crear nueva tarea"
             open={open}
             confirmLoading={false}
@@ -60,20 +71,14 @@ const EditModal = ({ open, handleModal, id }) => { //TODO solucionar ts
                 style={{ maxWidth: 600 }}
                 onFinish={onFinish}
                 onValuesChange={v => console.log(v)}
-                initialValues={!!id ? {
-                    done: chosenTask.done,
-                    type: chosenTask.type,
-                    task: chosenTask.task,
-                    priority: chosenTask.priority,
-                    subTasks: chosenTask.subTasks,
-                } : {}}
+                initialValues={!!id ? initialValuesChosenTask : initialValuesNewTask}
                 preserve={false}
             >
+                <Form.Item label="Tarea" name="task" rules={[{ required: true, message: 'El nombre de la tarea es requerido', }]}>
+                    <Input />
+                </Form.Item>
                 <Form.Item label="Terminada" name="done" valuePropName="checked">
                     <Checkbox />
-                </Form.Item>
-                <Form.Item label="Tarea" name="task">
-                    <Input />
                 </Form.Item>
                 <Form.Item label="Tipo de tarea" name="type">
                     <Select>
