@@ -42,7 +42,6 @@ const ToDoList = () => {
             {toDoList.map(task =>
                 <Card title={task.task} extra={task.done && <CheckCircleTwoTone twoToneColor={"green"} style={{ fontSize: '150%' }} />} style={{ width: 300 }}>
                     <p>{task.type}</p>
-                    <p>{task.task}</p>
                     <p>{task.priority}</p>
                     <p>{task.done}</p>
                     {task.subTasks?.map(subT =>
