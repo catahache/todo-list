@@ -2,14 +2,14 @@ import { Button, Checkbox, Form, Input, InputNumber, Modal, Select } from "antd"
 import { Task } from "../../interfaces/todoList"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../store/store"
-import { createTask } from "../../store/slices/todoList.slice"
+import { createTask, updateTask } from "../../store/slices/todoList.slice"
 import { useEffect, useState } from "react"
 import { getChosenTask } from "../../api/todo"
 
 const EditModal = ({ open, handleModal, id }) => { //TODO solucionar ts
     const dispatch = useDispatch<AppDispatch>()
     const { auth } = useSelector((state: RootState) => state.authData)
-    const [chosenTask, setChosenTask] = useState({}) //TODO ts
+    const [chosenTask, setChosenTask] = useState<Task>({} as Task)
     const [loading, setLoading] = useState(false) //TODO ts
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const EditModal = ({ open, handleModal, id }) => { //TODO solucionar ts
 
     const onFinish = (values: Task) => {
         if (!!id) { //Edits task
-            console.log(`edit task ${id}`)
+            dispatch(updateTask({...chosenTask, ...values}))
         } else {
             dispatch(createTask({ //Creates task
                 ...values,
@@ -60,7 +60,13 @@ const EditModal = ({ open, handleModal, id }) => { //TODO solucionar ts
                 style={{ maxWidth: 600 }}
                 onFinish={onFinish}
                 onValuesChange={v => console.log(v)}
-                initialValues={!!id ? { done: chosenTask.done, task: chosenTask.task } : {}}
+                initialValues={!!id ? {
+                    done: chosenTask.done,
+                    type: chosenTask.type,
+                    task: chosenTask.task,
+                    priority: chosenTask.priority,
+                    subTasks: chosenTask.subTasks,
+                } : {}}
                 preserve={false}
             >
                 <Form.Item label="Terminada" name="done" valuePropName="checked">
