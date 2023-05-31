@@ -1,8 +1,9 @@
 const ROUTES = {
     LOGIN: '/login',
-    HOME: '/',
+    HOME: '/home',
     TODOS: '/todos',
-    UNAUTHORIZED: '/unauthorized'
+    UNAUTHORIZED: '/unauthorized',
+    NOMATCH: '*'
 }
 
 export default ROUTES;
