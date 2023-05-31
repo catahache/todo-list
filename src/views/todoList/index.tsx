@@ -5,14 +5,15 @@ import { AppDispatch, RootState } from "../../store/store"
 import { useEffect, useState } from "react"
 import { loadToDoList, removeTask } from "../../store/slices/todoList.slice"
 import EditModal from "./EditModal"
+import TYPES from "../../constants/tasks"
 
 const ToDoList = () => {
     const { toDoList } = useSelector((state: RootState) => state.toDoData)
     const dispatch = useDispatch<AppDispatch>()
     const [open, setOpen] = useState(false)
-    const [chosenTask, setChosenTask] = useState<string|null>(null)
+    const [chosenTask, setChosenTask] = useState<string | null>(null)
 
-    const editTask = async (id:string) => {
+    const editTask = async (id: string) => {
         setChosenTask(id)
         handleModal(true)
     }
@@ -41,7 +42,7 @@ const ToDoList = () => {
             </Tooltip>
             {toDoList.map(task =>
                 <Card title={task.task} extra={task.done && <CheckCircleTwoTone twoToneColor={"green"} style={{ fontSize: '150%' }} />} style={{ width: 300 }}>
-                    <p>{task.type}</p>
+                    <p>{TYPES.find(type => task.type === type.type)?.label}</p>
                     <p>{task.priority}</p>
                     <p>{task.done}</p>
                     {task.subTasks?.map(subT =>
@@ -55,7 +56,7 @@ const ToDoList = () => {
                     </Tooltip>
                 </Card>
             )}
-            <EditModal open={open} id={chosenTask} handleModal={handleModal}/>
+            <EditModal open={open} id={chosenTask} handleModal={handleModal} />
         </>
     )
 }
