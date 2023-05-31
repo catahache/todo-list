@@ -1,32 +1,28 @@
 import { Routes as Switch, Route } from 'react-router-dom';
 import CONSTANTS from '../constants/routes';
+import Home from '../views/home';
 import Login from '../views/login';
 import NoMatch from '../views/noMatch';
+import ToDoList from '../views/todoList';
 import Unauthorized from '../views/unauthorized';
+import { RootState } from '../store/store';
+import { useSelector } from 'react-redux';
+import RequireAuth from './RequireAuth';
 
 const Routes = () => {
-//   const { state } = useAuth();
+  const { auth } = useSelector((state: RootState) => state.authData);
+
 
   return (
     <Switch>
-        <Route index path={CONSTANTS.HOME}/>
-        {/* public routes */}
-        {/* {!state.user && <Route path={CONSTANTS.ROUTES.LOGIN} element={<Login />} />} */}
-        <Route path={CONSTANTS.LOGIN} element={<Login />} />
-        <Route path={CONSTANTS.UNAUTHORIZED} element={<Unauthorized />} />
+      {!auth.token && <Route path={CONSTANTS.LOGIN} element={<Login />} />} //TODO  / login
+      <Route path={CONSTANTS.UNAUTHORIZED} element={<Unauthorized />} />
+      <Route path={CONSTANTS.NOMATCH} element={<NoMatch />} />
 
-        {/* we want to protect these routes */}
-        {/* <Route element={<RequireAuth allowedRoles={['admin']} />}> */}
-          {/* <Route index element={<Home />} /> */}
-          {/* <Route path="/forms/tournaments/:action">
-            <Route path=":id" element={<Tournament />} />
-            <Route path="" element={<Tournament />} />
-          </Route> */}
-          {/* <Route path="/tournaments" element={<Tournaments />} /> */}
-          {/* <Route path="/tournaments/:id/members" element={<TournamentMembers />} /> */}
-        {/* </Route> */}
-        <Route path="*" element={<NoMatch />} />
-      {/* </Route> */}
+      <Route element={<RequireAuth />}>
+        <Route index path={CONSTANTS.HOME} element={<Home />} />
+        <Route path={CONSTANTS.TODOS} element={<ToDoList />} />
+      </Route>
     </Switch>
   );
 };
