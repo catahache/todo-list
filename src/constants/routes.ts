@@ -6,4 +6,4 @@ const ROUTES = {
     NOMATCH: '*'
 }
 
-export default ROUTES;
+export default ROUTES
