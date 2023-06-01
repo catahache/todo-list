@@ -70,7 +70,6 @@ const EditModal = ({ open, handleModal, id }) => { //TODO solucionar ts
                 layout="horizontal"
                 style={{ maxWidth: 600 }}
                 onFinish={onFinish}
-                onValuesChange={v => console.log(v)}
                 initialValues={!!id ? initialValuesChosenTask : initialValuesNewTask}
                 preserve={false}
             >
