@@ -1,11 +1,13 @@
-import { Button, Checkbox, Form, Input } from 'antd'
-import React, { FC } from 'react'
-import { login } from '../../store/slices/auth.slice';
-import { LoginData } from '../../interfaces/auth';
+import { Button, Card, Checkbox, Form, Input } from 'antd'
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { FC } from 'react'
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store/store';
 import { useNavigate } from 'react-router-dom';
 import CONSTANTS from '../../constants/routes';
+import { LoginData } from '../../interfaces/auth';
+import { login } from '../../store/slices/auth.slice';
+import { AppDispatch } from '../../store/store';
+
 
 const Login: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -21,42 +23,44 @@ const Login: FC = () => {
     })
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-  };
-
   return (
-    <Form
-      name="login"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-      style={{ maxWidth: 600 }}
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off"
-    >
-      <Form.Item
-        label="Email"
-        name="email"
-        rules={[{ required: true, type: 'email', message: 'The input is not valid E-mail!', }]}
+    <Card style={{ height: '40vh', width: '30vw', textAlign: 'left' }} >
+      <h2>Login</h2>
+      <Form
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        autoComplete="off"
       >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[{ required: true, message: 'Please input your password!' }]}
-      >
-        <Input.Password />
-      </Form.Item>
-
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
-          Login
+        <Form.Item
+          name="email"
+          rules={[{ required: true, type: 'email', message: 'El email no es válido', }]}
+        >
+          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[{ required: true, message: 'La contraseña es requerida' }]}
+        >
+          <Input
+            prefix={<LockOutlined className="site-form-item-icon" />}
+            type="password"
+            placeholder="Password"
+          />
+        </Form.Item>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Form.Item name="remember" valuePropName="checked" noStyle>
+            <Checkbox>Recuerdame</Checkbox>
+          </Form.Item>
+          <a className="login-form-forgot" href="">
+            Olvidé la contraseña
+          </a>
+        </div>
+        <Button style={{ width: '100%', marginTop: '25px' }} type="primary" htmlType="submit" className="login-form-button">
+          Log in
         </Button>
-      </Form.Item>
-    </Form>
+        O <a href="">regristrate ahora!</a>
+      </Form>
+    </Card>
   )
 }
 
