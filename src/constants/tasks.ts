@@ -1,8 +1,14 @@
 const TYPES = [
-    { type: 'study', label: 'Estudio' },
-    { type: 'work', label: 'Trabajo' },
-    { type: 'home', label: 'Hogar' },
-    { type: 'others', label: 'Otras' },
+    { type: 'study', label: 'Estudio', color: '#FF5722' },
+    { type: 'work', label: 'Trabajo', color: '#448AFF' },
+    { type: 'home', label: 'Hogar', color: '#9C27B0' },
+    { type: 'others', label: 'Otras', color: '#455A64' },
 ]
 
-export default TYPES
+const PRIORITIES = [
+    { priority: 1, antdColor: 'error' },
+    { priority: 2, antdColor: 'warning' },
+    { priority: 3, antdColor: 'success' },
+]
+
+export { TYPES, PRIORITIES }
