@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import CONSTANTS from '../../constants/routes'
 import { RootState } from '../../store/store'
 import { useSelector } from 'react-redux'
+import imagen from '../../assets/checklist.png';
 
 const Home = () => {
   const navigate = useNavigate()
@@ -12,10 +13,12 @@ const Home = () => {
     navigate(CONSTANTS.TODOS)
   }
   return (
-    <>
-      <div>{`¡${auth.user?.firstName}, bienvenido a Todo List: Tu compañero de organización y productividad!`}</div>
-      <Button onClick={handleCreateList} type="primary">Crea tu Todo List</Button>
-    </>
+    <div>
+      <div>{`Bienvenido de nuevo a Todo List, ${auth.user?.firstName}`}</div>
+      <img src={imagen} alt="Imagen" width="400" />
+
+      <Button onClick={handleCreateList} type="primary" style={{width:'100%'}}>¡Estoy listo para organizarme!</Button>
+    </div>
 
   )
 }
