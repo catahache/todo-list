@@ -1,11 +1,11 @@
-import { Button, Card, Tooltip } from "antd"
-import { CheckCircleTwoTone, DeleteTwoTone, EditTwoTone, PlusOutlined } from '@ant-design/icons'
+import { Button, Tooltip } from "antd"
+import { PlusOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../store/store"
 import { useEffect, useState } from "react"
 import { loadToDoList, removeTask } from "../../store/slices/todoList.slice"
 import EditModal from "./EditModal"
-import TYPES from "../../constants/tasks"
+import TaskCard from "./TaskCard"
 
 const ToDoList = () => {
     const { toDoList } = useSelector((state: RootState) => state.toDoData)
@@ -24,6 +24,7 @@ const ToDoList = () => {
     }
 
     const deleteTask = (id: string) => {
+        //TODO confirm dialog
         dispatch(removeTask(id))
     }
 
@@ -41,20 +42,7 @@ const ToDoList = () => {
                 <Button onClick={addTask} type="primary" shape="circle" icon={<PlusOutlined />} />
             </Tooltip>
             {toDoList.map(task =>
-                <Card title={task.task} extra={task.done && <CheckCircleTwoTone twoToneColor={"green"} style={{ fontSize: '150%' }} />} style={{ width: 300 }}>
-                    <p>{TYPES.find(type => task.type === type.type)?.label}</p>
-                    <p>{task.priority}</p>
-                    <p>{task.done}</p>
-                    {task.subTasks?.map(subT =>
-                        <p>{subT}</p>
-                    )}
-                    <Tooltip title="Editar">
-                        <Button onClick={() => { editTask(task._id) }} shape="circle" icon={<EditTwoTone />} />
-                    </Tooltip>
-                    <Tooltip title="Eliminar">
-                        <Button onClick={() => { deleteTask(task._id) }} shape="circle" icon={<DeleteTwoTone />} />
-                    </Tooltip>
-                </Card>
+                <TaskCard task={task} editTask={editTask} deleteTask={deleteTask} />
             )}
             <EditModal open={open} id={chosenTask} handleModal={handleModal} />
         </>
