@@ -4,9 +4,9 @@ import { FC } from "react";
 const NoMatch: FC = () => {
   return (
     <div>
-      <h2>Nothing to see here!</h2>
+      <h2>¡Nada que ver aquí!</h2>
       <p>
-        <Link to="/">Go to the home page of the app</Link>
+        <Link to="/">Ir a la página principal</Link>
       </p>
     </div>
   );

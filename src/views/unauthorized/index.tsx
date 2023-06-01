@@ -7,11 +7,11 @@ const Unauthorized = () => {
 
   return (
     <section>
-      <h1>Unauthorized</h1>
+      <h1>¡No estás logueado!</h1>
       <br />
-      <p>You do not have access to the requested page.</p>
+      <p>Necesitás loguearte para acceder a esta página</p>
       <div>
-        <button onClick={goBack}>Go Back</button>
+        <button onClick={goBack}>Ir atrás</button>
       </div>
     </section>
   );
