@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import CONSTANTS from '../../constants/routes'
 import { RootState } from '../../store/store'
 import { useSelector } from 'react-redux'
-import imagen from '../../assets/checklist.png';
+import Checklist from '../../assets/checklist.svg';
+import '../../style/globalStyles.css'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -12,12 +13,18 @@ const Home = () => {
   const handleCreateList = () => {
     navigate(CONSTANTS.TODOS)
   }
-  return (
-    <div>
-      <div>{`Bienvenido de nuevo a Todo List, ${auth.user?.firstName}`}</div>
-      <img src={imagen} alt="Imagen" width="400" />
 
-      <Button onClick={handleCreateList} type="primary" style={{width:'100%'}}>¡Estoy listo para organizarme!</Button>
+  return (
+    <div className='container'>
+      <div className='row align-items-center'>
+        <div className='col-5 text-align-right'>
+          <h2 style={{ fontSize: '3em' }}>{`Bienvenido de nuevo a Todo List, ${auth.user?.firstName}`}</h2>
+          <Button onClick={handleCreateList} type="primary" className='mt-10'>¡Estoy listo para organizarme!</Button>
+        </div>
+        <img className='col-7' src={Checklist} alt="Your SVG" />
+      </div>
+
+
     </div>
 
   )
