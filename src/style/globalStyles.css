@@ -1,0 +1,36 @@
+.ml-10 {
+    margin-left: 10px
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.flex {
+    display: flex;
+}
+
+
+.br-10 {
+    border-radius: 10px;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.text-align-start {
+    text-align: start;
+}
