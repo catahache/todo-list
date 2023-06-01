@@ -1,4 +1,4 @@
-import ToDoListComponent from "./ToDoList"
+import ToDoListComponent from "../../components/toDoListComponent/ToDoList"
 
 const ToDoList = () => {
 
