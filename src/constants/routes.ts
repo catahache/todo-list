@@ -1,6 +1,6 @@
 const ROUTES = {
     LOGIN: '/login',
-    HOME: '/home',
+    HOME: '/',
     TODOS: '/todos',
     UNAUTHORIZED: '/unauthorized',
     NOMATCH: '*'
