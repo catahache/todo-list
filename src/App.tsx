@@ -4,16 +4,25 @@ import Routes from './routes'
 import { Provider } from 'react-redux'
 import { store } from './store/store'
 import 'bootstrap-4-grid/css/grid.min.css';
+import { ConfigProvider } from 'antd'
 
 function App() {
 
-  return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
+  const customTheme = {
+    token: {
+      colorPrimary: '#FF9800',
+    },
 
-    </Provider>
+  }
+
+  return (
+    <ConfigProvider theme={customTheme}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes />
+        </BrowserRouter>
+      </Provider>
+    </ConfigProvider>
   )
 }
 
