@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { CreateTask, Task } from "../interfaces/todoList";
 
-const idAPI = '9fba4ea3392640ccaeebafcc1c02a9cc'
+const idAPI = import.meta.env.VITE_API_KEY
 
 export const loadToDoList = async () => {
     try {
