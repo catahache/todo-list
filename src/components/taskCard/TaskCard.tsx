@@ -1,10 +1,20 @@
 import { Badge, Card, Space, Tag, Tooltip } from "antd"
 import { CheckCircleTwoTone, DeleteTwoTone, EditTwoTone } from '@ant-design/icons'
-import { PRIORITIES, TYPES } from "../../constants/tasks"
+import { TYPES } from "../../constants/tasks"
 import './taskCard.css'
 import '../../style/globalStyles.css'
+import { Task } from "../../interfaces/todoList"
+import { FC } from "react"
+import { PresetStatusColorTypes } from "antd/es/_util/colors"
 
-const TaskCard = ({ task, editTask, deleteTask }) => {
+interface TaskCardProps {
+    task: Task, 
+    editTask: (id: string) => void, 
+    deleteTask: (id: string) => void
+}
+
+const TaskCard: FC<TaskCardProps> = ({ task, editTask, deleteTask }) => {
+
     return (
         <Card className="cardStyle" bodyStyle={{ padding: "10px 14px" }}>
             <div className="container">
@@ -38,7 +48,7 @@ const TaskCard = ({ task, editTask, deleteTask }) => {
                         </Space>
                     </div>
                     <div className="col-1 text-align-center">
-                        <Badge status={PRIORITIES.find(p => task.priority === p.priority)?.antdColor} /> {/* TODO ts */}
+                        <Badge status={PresetStatusColorTypes[task.priority]} />
                     </div>
                 </div>
             </div>

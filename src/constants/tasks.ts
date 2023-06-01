@@ -5,10 +5,4 @@ const TYPES = [
     { type: 'others', label: 'Otras', color: '#455A64' },
 ]
 
-const PRIORITIES = [
-    { priority: 1, antdColor: 'error' },
-    { priority: 2, antdColor: 'warning' },
-    { priority: 3, antdColor: 'success' },
-]
-
-export { TYPES, PRIORITIES }
+export { TYPES }

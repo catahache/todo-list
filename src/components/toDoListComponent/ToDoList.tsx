@@ -10,13 +10,18 @@ import { ExclamationCircleFilled } from '@ant-design/icons';
 import TaskCard from "../../components/taskCard/TaskCard"
 import "./toDoList.css"
 import "../../style/globalStyles.css"
+import { Task } from "../../interfaces/todoList"
+
+type ReduceTasksType = {
+    [key: string]: Task[]
+}
 
 const ToDoList = () => {
     const dispatch = useDispatch<AppDispatch>()
     const { toDoList } = useSelector((state: RootState) => state.toDoData)
     const [chosenTask, setChosenTask] = useState<string | null>(null)
     const [open, setOpen] = useState(false)
-    const tasksByType = toDoList.reduce((acc, obj) => {
+    const tasksByType = toDoList.reduce<ReduceTasksType>((acc, obj) => {
         const type = obj.type;
         if (!acc[type]) {
             acc[type] = [];

@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { CreateTask, Task } from "../interfaces/todoList";
 
-const idAPI = '59ffa967075a42e7a8ccb63ae77fcd5b'
+const idAPI = '4c2d959ff30b45c7b0c1d35a96995132'
 
 export const loadToDoList = async () => {
     try {
@@ -44,7 +44,7 @@ export const removeTask = async (id:string):Promise<AxiosResponse> =>{
         throw err
     }
 }
-export const getChosenTask = async (id:string):Promise<AxiosResponse<Task>> =>{
+export const getChosenTask = async (id: string | null): Promise<AxiosResponse<Task>> => {
     try {
         const response = await axios.get(`https://crudcrud.com/api/${idAPI}/todos/${id}`);
         return response

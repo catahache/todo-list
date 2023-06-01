@@ -15,7 +15,7 @@ const Login: FC = () => {
 
   const onFinish = async (values: LoginData) => {
     await dispatch(login(values)).then((auth) => {
-      if (auth.payload?.token) {//TODO fix ts
+      if (auth !== undefined) {
         navigate(CONSTANTS.HOME)
       } else {
         // TODO alerta usuario incorrecto

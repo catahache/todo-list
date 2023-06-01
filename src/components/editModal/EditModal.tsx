@@ -3,15 +3,21 @@ import { Task } from "../../interfaces/todoList"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../store/store"
 import { createTask, updateTask } from "../../store/slices/todoList.slice"
-import { useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { getChosenTask } from "../../api/todo"
 import "./editModal.css";
 
-const EditModal = ({ open, handleModal, id }) => { //TODO solucionar ts
+interface EditModalProp {
+    open: boolean,
+    handleModal: (value: boolean) => void,
+    id: string | null
+}
+
+const EditModal: FC<EditModalProp> = ({ open, handleModal, id }) => {
     const dispatch = useDispatch<AppDispatch>()
     const { auth } = useSelector((state: RootState) => state.authData)
     const [chosenTask, setChosenTask] = useState<Task>({} as Task)
-    const [loading, setLoading] = useState(false) //TODO ts
+    const [loading, setLoading] = useState(false)
     const initialValuesChosenTask = {
         done: chosenTask.done,
         type: chosenTask.type,
